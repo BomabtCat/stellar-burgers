@@ -1,0 +1,31 @@
+{
+  "success": true,
+  "name": "Cosmic Burger",
+  "order": {
+    "number": 98765,
+    "ingredients": [
+      "61a7c4d2f3bae1001b59c211",
+      "61a7c4d2f3bae1001b59c215",
+      "61a7c4d2f3bae1001b59c21a",
+      "61a7c4d2f3bae1009c21a245"
+
+    ],
+    "_id": "order_987XYZ",
+    "status": "done",
+    "description": "Собранный бургер с уникальным составом",
+    "totalPrice": 1420,
+    "user": {
+      "name": "Иван Иванов",
+      "email": "ivan@example.com"
+    },
+    "createdAt": "2025-04-05T08:45:30.000Z",
+    "updatedAt": "2025-04-05T08:46:12.000Z",
+    "isFastOrder": false,
+    "deliveryAddress": "ул. Космическая, д. 10, кв. 45",
+    "paymentType": "card",
+    "restaurant": {
+      "name": "Бургеры Вселенной",
+      "address": "Москва, Солнечная Галактика, стенд B4"
+    }
+  }
+}
