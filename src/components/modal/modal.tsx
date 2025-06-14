@@ -4,24 +4,29 @@ import ReactDOM from 'react-dom';
 import { TModalProps } from './type';
 import { ModalUI } from '@ui';
 
-const modalRoot = document.getElementById('modals');
+const _modalRoot = document.getElementById('modals');
 
 export const Modal: FC<TModalProps> = memo(({ title, onClose, children }) => {
   useEffect(() => {
-    const handleEsc = (e: KeyboardEvent) => {
-      e.key === 'Escape' && onClose();
+    const _handleEsc = (e: KeyboardEvent) => {
+      e.key === 'Escape' && _handleClose();
     };
 
-    document.addEventListener('keydown', handleEsc);
+    document.addEventListener('keydown', _handleEsc);
     return () => {
-      document.removeEventListener('keydown', handleEsc);
+      document.removeEventListener('keydown', _handleEsc);
     };
-  }, [onClose]);
+  }, []);
+
+  const _handleClose = () => {
+    onClose();
+    localStorage.setItem('orderModalClosed', 'true');
+  };
 
   return ReactDOM.createPortal(
-    <ModalUI title={title} onClose={onClose}>
+    <ModalUI title={title} onClose={_handleClose}>
       {children}
     </ModalUI>,
-    modalRoot as HTMLDivElement
+    _modalRoot as HTMLDivElement
   );
 });

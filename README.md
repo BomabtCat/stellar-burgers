@@ -17,5 +17,5 @@
 ## Важно:
 
 Для корректной работы запросов к серверу необходимо добавить переменную BURGER_API_URL в окружение. Сама ссылка находится в файле `.env.example`.
-# stellar-burgers
-# stellar-burgers
+slices_ingredients
+slice_user

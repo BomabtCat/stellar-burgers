@@ -1,0 +1,11 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Задает высоту контейнера на весь экран */
+  }
+  
+  .content {
+    text-align: center; /* Центрирует текст внутри контента */
+  }
+  

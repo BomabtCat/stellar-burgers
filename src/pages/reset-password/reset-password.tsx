@@ -1,35 +1,39 @@
 import { FC, SyntheticEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import { resetPasswordApi } from '@api';
 import { ResetPasswordUI } from '@ui-pages';
 
 export const ResetPassword: FC = () => {
   const navigate = useNavigate();
+
   const [password, setPassword] = useState('');
   const [token, setToken] = useState('');
-  const [error, setError] = useState<Error | null>(null);
+  const [error, setError] = useState<string | undefined>(undefined);
 
-  const handleSubmit = (e: SyntheticEvent) => {
+  const isResetPasswordAllowed = () =>
+    localStorage.getItem('resetPassword') !== null;
+
+  const handleSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
-    setError(null);
-    resetPasswordApi({ password, token })
-      .then(() => {
-        localStorage.removeItem('resetPassword');
-        navigate('/login');
-      })
-      .catch((err) => setError(err));
+    setError(undefined);
+    try {
+      await resetPasswordApi({ password, token });
+      localStorage.removeItem('resetPassword');
+      navigate('/login');
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Unknown error occurred');
+    }
   };
 
   useEffect(() => {
-    if (!localStorage.getItem('resetPassword')) {
+    if (!isResetPasswordAllowed()) {
       navigate('/forgot-password', { replace: true });
     }
   }, [navigate]);
 
   return (
     <ResetPasswordUI
-      errorText={error?.message}
+      errorText={error}
       password={password}
       token={token}
       setPassword={setPassword}
